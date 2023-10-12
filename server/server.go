@@ -1,9 +1,10 @@
-package main
+package server
 
 import (
-	"github.com/gin-gonic/gin"
 	"html/template"
 	"log"
+
+	"github.com/gin-gonic/gin"
 )
 
 var html = template.Must(template.New("https").Parse(`
@@ -54,7 +55,7 @@ func GinInitHttp2() *gin.Engine {
 	})
 
 	// Listen and Server in https://127.0.0.1:8080
-	r.RunTLS(":8000", "./key-ssl/server.pem", "./key-ssl/server.key")
+	r.RunTLS(":8000", "./server/key-ssl/server.pem", "./server/key-ssl/server.key")
 
 	return r
 }

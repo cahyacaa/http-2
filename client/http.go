@@ -1,14 +1,15 @@
-package main
+package client
 
 import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"golang.org/x/net/http2"
 	"io"
 	"log"
 	"net/http"
 	"os"
+
+	"golang.org/x/net/http2"
 )
 
 func transport2() *http2.Transport {
@@ -35,8 +36,27 @@ func tlsConfigClient() *tls.Config {
 	}
 }
 
-func Client() {
+func Http2() {
 	client := &http.Client{Transport: transport2()}
+
+	res, err := client.Get("https://localhost:8000/welcome")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	res.Body.Close()
+
+	fmt.Printf("Code: %d\n", res.StatusCode)
+	fmt.Printf("Body: %s\n", body)
+}
+
+func Http1() {
+	client := &http.Client{}
 
 	res, err := client.Get("https://localhost:8000/welcome")
 	if err != nil {

@@ -1,6 +1,8 @@
-package main
+package client
 
-import "sync"
+import (
+	"sync"
+)
 
 func main() {
 	wg := &sync.WaitGroup{}
@@ -8,8 +10,9 @@ func main() {
 		go func() {
 			wg.Add(1)
 			defer wg.Done()
-			Client()
+			Http2()
 		}()
 
 	}
+	wg.Wait()
 }

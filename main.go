@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"server/server"
 	"syscall"
 )
 
@@ -12,7 +13,7 @@ func main() {
 	logger.Println("[WARNING] DON'T USE THE EMBED CERTS FROM THIS EXAMPLE IN PRODUCTION ENVIRONMENT, GENERATE YOUR OWN!")
 
 	go func() {
-		GinInitHttp2()
+		server.GinInitHttp2()
 	}()
 
 	sc := make(chan os.Signal, 1)
