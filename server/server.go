@@ -55,7 +55,7 @@ func GinInitHttp2() *gin.Engine {
 	})
 
 	// Listen and Server in https://127.0.0.1:8080
-	r.RunTLS(":8000", "./server/key-ssl/server.pem", "./server/key-ssl/server.key")
+	r.RunTLS(":8000", "./server/cert/public.cert", "./server/cert/private.key")
 
 	return r
 }

@@ -97,16 +97,18 @@ export const options = {
         key: key,
       },
     ],
-    vus :10,
+    vus :100,
     duration:'10s',
     insecureSkipTLSVerify: true
   };
 
 export default function () {
-  const res = http.get('http://127.0.0.1:8081');
-//   const res = http.get('https://127.0.0.1:8080');
+  // const res = http.get('http://127.0.0.1:8080/shipments');
+  const res = http.get('http://127.0.0.1:8081/shipments');
+
   check(res, {
     'status is 200': (r) => r.status === 200,
     'protocol is HTTP/2': (r) => r.proto === 'HTTP/2.0',
+    'protocol is HTTP/1': (r) => r.proto === 'HTTP/1.1',
   });
 }
